@@ -5,6 +5,9 @@ Wins::Application.routes.draw do
   root to: 'wins#index'
   #   get 'products/:id' => 'catalog#view'
   get 'register', to: 'users#new'
+  get '/login', to: 'sessions#new' #login_path
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy' #logout_path
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
