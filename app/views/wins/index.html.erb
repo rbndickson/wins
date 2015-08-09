@@ -1,13 +1,15 @@
-<div class="row">
-    <%= form_for @win do |f| %>
-    <div class="col-sm-9">
-      <%= f.text_field :body, placeholder: "new win", class: "form-control input-lg input-super" %>
-    </div>
-    <div class="col-md-3">
-      <%= f.submit "Add", class: 'btn btn-lg btn-super btn-primary' %>
-    </div>
-    <% end %>
-</div>
+<% if current_win_count < 3 %>
+  <div class="row">
+      <%= form_for @win do |f| %>
+      <div class="col-sm-9">
+        <%= f.text_field :body, placeholder: "new win", class: "form-control input-lg input-super" %>
+      </div>
+      <div class="col-md-3">
+        <%= f.submit "Add", class: 'btn btn-lg btn-super btn-primary' %>
+      </div>
+      <% end %>
+  </div>
+<% end %>
 <ol>
   <div class="row">
     <%= render @wins %>
