@@ -2,3 +2,23 @@
   padding-left: 25px;
   padding-right:  25px;
 }
+
+.input-super {
+  height: 72px;
+  padding: 10px 16px;
+  font-size: 36px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}
+select.input-super {
+  height: 72px;
+  line-height: 72px;
+}
+
+.btn-super,
+.btn-group-super > .btn {
+  padding: 10px 16px;
+  font-size: 36px;
+  line-height: 1.3333333;
+  border-radius: 6px;
+}

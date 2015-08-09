@@ -1,7 +1,8 @@
 class WinsController < ApplicationController
 
   def index
-    @wins = Win.all
+    @win = Win.new
+    @wins = Win.where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def new
