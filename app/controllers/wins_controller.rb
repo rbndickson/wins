@@ -1,8 +1,12 @@
 class WinsController < ApplicationController
 
   def index
-    @win = Win.new
-    @wins = Win.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    if logged_in?
+      @win = Win.new
+      @wins = Win.where(user_id: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
+    else
+      redirect_to login_path
+    end
   end
 
   def create
@@ -10,7 +14,7 @@ class WinsController < ApplicationController
     @win.user_id = current_user.id
     @win.completed = false
     if @win.save
-      flash[:notice] = "Win created."
+      flash[:success] = "Win created."
       redirect_to wins_path
     else
       render :index

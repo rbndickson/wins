@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to wins_path
     else
-      flash[:danger] = "Error"
+      flash[:danger] = "Error in creating account"
       render :new
     end
   end
