@@ -18,7 +18,7 @@ Wins::Application.routes.draw do
   #   resources :products
 
   resources :users, only: [:create, :edit, :update, :show]
-  resources :wins
+  resources :wins, except: [:new]
 
   # Example resource route with options:
   #   resources :products do
