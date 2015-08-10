@@ -26,7 +26,12 @@ class WinsController < ApplicationController
   end
 
   def update
+    @win = Win.find(params[:id])
+    if @win.update(win_params)
+      redirect_to wins_path
+    else
 
+    end
   end
 
   def show
@@ -36,7 +41,7 @@ class WinsController < ApplicationController
   private
 
   def win_params
-    params.require(:win).permit(:body, :user_id, :status)
+    params.require(:win).permit(:body, :user_id, :completed)
   end
 
 end

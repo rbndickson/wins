@@ -1,3 +1,12 @@
-<h1><li><%= win.body %></li></h1>
-<br>
-<hr>
+<div class="row">
+  <% if win.completed == true %>
+    <h1><li  class="list-group-item list-group-item-success">
+  <% else %>
+    <h1><li  class="list-group-item">
+  <% end %>
+    <%= win.body %>
+    <%= link_to win_path(win, win: {completed: true}), method: 'put' do %>
+      <span class="glyphicon glyphicon-ok pull-right"></span>
+    <% end %>
+  </li></h1>
+</div>
