@@ -6,7 +6,12 @@
 }
 
 .navbar {
+  margin-top: 15px;
   font-size: 24px;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+  background-color: white;
 }
 
 .btn-wide {
