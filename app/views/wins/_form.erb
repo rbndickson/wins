@@ -1,10 +1,12 @@
 <div class="row">
+  <h1>
     <%= form_for @win do |f| %>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <%= f.text_field :body, placeholder: "new win", class: "form-control input-lg input-super", :autofocus => true %>
     </div>
-    <div class="col-md-3">
-      <%= f.submit "Add", class: 'btn btn-lg btn-super btn-primary' %>
+    <div class="col-md-2">
+      <%= f.submit "Add", class: 'btn btn-lg btn-super btn-primary full-width pull-right' %>
     </div>
     <% end %>
+  <h1>
 </div>
