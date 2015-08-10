@@ -38,6 +38,12 @@ class WinsController < ApplicationController
 
   end
 
+  def destroy
+    @win = Win.find(params[:id])
+    @win.destroy
+    redirect_to wins_path
+  end
+
   private
 
   def win_params
