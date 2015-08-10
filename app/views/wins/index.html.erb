@@ -2,7 +2,7 @@
   <div class="row">
       <%= form_for @win do |f| %>
       <div class="col-md-9">
-        <%= f.text_field :body, placeholder: "new win", class: "form-control input-lg input-super" %>
+        <%= f.text_field :body, placeholder: "new win", class: "form-control input-lg input-super", :autofocus => true %>
       </div>
       <div class="col-md-3">
         <%= f.submit "Add", class: 'btn btn-lg btn-super btn-primary' %>
