@@ -1,12 +1,34 @@
 <div class="row">
-  <% if win.completed == true %>
+  <% if win.id == params[:id].to_i %>
+    <div class="row">
+        <%= form_for win do |f| %>
+        <div class="col-md-9">
+          <%= f.text_field :body, class: "form-control input-lg input-super", :autofocus => true %>
+        </div>
+        <div class="col-md-3">
+          <%= f.submit "Update", class: 'btn btn-lg btn-super btn-primary' %>
+        </div>
+        <% end %>
+    </div>
+  <% elsif win.completed == true %>
     <h1><li  class="list-group-item list-group-item-success">
+      <%= win.body %>
+      <%= link_to win_path(win, win: {completed: false}), method: 'put' do %>
+        <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
+      <% end %>
+      <%= link_to edit_win_path(win), method: 'get' do %>
+        <span class="glyphicon glyphicon-edit win-icon pull-right"></span>
+      <% end %>
+      </li></h1>
   <% else %>
     <h1><li  class="list-group-item">
+      <%= win.body %>
+      <%= link_to win_path(win, win: {completed: true}), method: 'put' do %>
+        <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
+      <% end %>
+      <%= link_to edit_win_path(win), method: 'get' do %>
+        <span class="glyphicon glyphicon-edit win-icon pull-right"></span>
+      <% end %>
+      </li></h1>
   <% end %>
-    <%= win.body %>
-    <%= link_to win_path(win, win: {completed: true}), method: 'put' do %>
-      <span class="glyphicon glyphicon-ok pull-right"></span>
-    <% end %>
-  </li></h1>
 </div>

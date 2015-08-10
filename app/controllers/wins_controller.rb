@@ -22,7 +22,7 @@ class WinsController < ApplicationController
   end
 
   def edit
-
+    @wins = Win.where(user_id: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def update
