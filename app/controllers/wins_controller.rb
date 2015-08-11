@@ -30,7 +30,8 @@ class WinsController < ApplicationController
     if @win.update(win_params)
       redirect_to wins_path
     else
-
+      flash[:danger] = "Win cannot be blank"
+      redirect_to edit_win_path
     end
   end
 
