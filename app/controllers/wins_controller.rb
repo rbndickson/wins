@@ -17,7 +17,7 @@ class WinsController < ApplicationController
       redirect_to wins_path
     else
       flash[:danger] = "Win cannot be blank"
-      redirect_to wins_path
+      render :index
     end
   end
 
@@ -31,7 +31,7 @@ class WinsController < ApplicationController
       redirect_to wins_path
     else
       flash[:danger] = "Win cannot be blank"
-      redirect_to edit_win_path
+      render :index
     end
   end
 

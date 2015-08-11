@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash[:danger] = 'Login error, please try again.'
-      redirect_to login_path
+      render :new
     end
   end
 
