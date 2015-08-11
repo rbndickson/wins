@@ -3,7 +3,7 @@ class WinsController < ApplicationController
   def index
     if logged_in?
       @win = Win.new
-      @wins = Win.where(user_id: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
+      @wins = Win.where(creator: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
     else
       redirect_to login_path
     end
@@ -11,7 +11,7 @@ class WinsController < ApplicationController
 
   def create
     @win = Win.new(win_params)
-    @win.user_id = current_user.id
+    @win.creator = current_user
     @win.completed = false
     if @win.save
       flash[:success] = "Win created."
@@ -22,7 +22,7 @@ class WinsController < ApplicationController
   end
 
   def edit
-    @wins = Win.where(user_id: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @wins = Win.where(creator: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def update

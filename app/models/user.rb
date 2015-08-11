@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-
   has_many :wins
   has_secure_password validations: false
 
