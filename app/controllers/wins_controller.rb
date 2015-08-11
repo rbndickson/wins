@@ -16,7 +16,8 @@ class WinsController < ApplicationController
     if @win.save
       redirect_to wins_path
     else
-      render :index
+      flash[:danger] = "Win cannot be blank"
+      redirect_to wins_path
     end
   end
 
