@@ -14,7 +14,6 @@ class WinsController < ApplicationController
     @win.creator = current_user
     @win.completed = false
     if @win.save
-      flash[:success] = "Win created."
       redirect_to wins_path
     else
       render :index
