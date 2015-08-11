@@ -1,13 +1,9 @@
 class WinsController < ApplicationController
-  before_action :require_user, except: [:index]
+  before_action :require_login
 
   def index
-    if logged_in?
-      @win = Win.new
-      @wins = Win.where(creator: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
-    else
-      redirect_to login_path
-    end
+    @win = Win.new
+    @wins = Win.where(creator: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
   end
 
   def create
