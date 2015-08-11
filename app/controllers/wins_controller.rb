@@ -1,4 +1,5 @@
 class WinsController < ApplicationController
+  before_action :require_user, except: [:index]
 
   def index
     if logged_in?
@@ -17,7 +18,7 @@ class WinsController < ApplicationController
       redirect_to wins_path
     else
       flash[:danger] = "Win cannot be blank"
-      render :index
+      redirect_to wins_path
     end
   end
 
@@ -31,7 +32,7 @@ class WinsController < ApplicationController
       redirect_to wins_path
     else
       flash[:danger] = "Win cannot be blank"
-      render :index
+      redirect_to wins_path
     end
   end
 

@@ -1,0 +1,12 @@
+<% if submitted_form.errors.any? %>
+  <div class="alert alert-danger" >
+    <h5>The following errors have occured:</h5>
+    <ul>
+      <% submitted_form.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end  %>

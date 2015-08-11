@@ -12,6 +12,13 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def require_user
+    if !logged_in?
+      flash[:danger] = "You must be logged in for access"
+      redirect_to root_path
+    end
+  end
+
   def current_win_count
     Win.where(user_id: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day).size
   end

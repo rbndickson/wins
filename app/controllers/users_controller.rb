@@ -12,7 +12,6 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to wins_path
     else
-      flash[:danger] = "Error in creating account"
       render :new
     end
   end
@@ -26,7 +25,6 @@ class UsersController < ApplicationController
       flash[:success] = "Your account was updated."
       redirect_to user_path
     else
-      flash[:danger] = "Your account could not be updated."
       render :edit
     end
   end
