@@ -3,4 +3,6 @@ class Win < ActiveRecord::Base
 
   validates :creator, presence: true
   validates :body, presence: true
+
+  scope :today, -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
 end

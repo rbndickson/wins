@@ -3,7 +3,12 @@ class WinsController < ApplicationController
 
   def index
     @win = Win.new
-    @wins = Win.where(creator: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @wins = Win.where(creator: current_user).today
+    @wins = Win.where(creator: current_user).reverse if params[:history].present?
+  end
+
+  def history
+    @wins = Win.all.reverse
   end
 
   def create
@@ -19,13 +24,14 @@ class WinsController < ApplicationController
   end
 
   def edit
-    @wins = Win.where(creator: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @wins = Win.where(creator: current_user).today
+    @wins = Win.where(creator: current_user).reverse if params[:win].present?
   end
 
   def update
     @win = Win.find(params[:id])
     if @win.update(win_params)
-      redirect_to wins_path
+      redirect_to wins_path(params[:win])
     else
       flash[:danger] = "Win cannot be blank"
       redirect_to wins_path

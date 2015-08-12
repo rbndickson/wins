@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_win_count
-    Win.where(user_id: current_user).where("created_at >= ?", Time.zone.now.beginning_of_day).size
+    Win.where(user_id: current_user).today.size
   end
 
 end

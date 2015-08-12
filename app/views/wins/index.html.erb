@@ -1,6 +1,6 @@
 <%= render 'layouts/messages' %>
 
-<% if current_win_count < 3 %>
+<% if current_win_count < 3 && !params[:history].present? %>
   <%= render 'form' %>
 <% end %>
 
