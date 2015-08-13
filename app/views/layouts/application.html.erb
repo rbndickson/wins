@@ -15,5 +15,10 @@
     <div class="container">
       <%= yield %>
     </div>
+    <% if logged_in? %>
+      <div class="footer text-center lead">
+        Time is now <%=  format_time(Time.current) %>. <%= Time.current.seconds_until_end_of_day %> seconds until the end of the day.
+      </div>
+    <% end %>
   </body>
 </html>

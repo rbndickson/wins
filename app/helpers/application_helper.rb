@@ -4,4 +4,7 @@ module ApplicationHelper
     time.strftime("%B %d %Y")
   end
 
+  def format_time(time)
+    time.strftime("%H:%M %Z")
+  end
 end

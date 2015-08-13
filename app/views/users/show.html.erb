@@ -6,6 +6,6 @@
     </div>
     <hr>
     <p>Time zone: <%= @user.time_zone %></p>
-    <p>Time: <%= Time.current.in_time_zone(@user.time_zone) %></p>
+    <p>Time: <%= format_time(Time.current) %></p>
   </div>
 </div>

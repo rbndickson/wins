@@ -39,6 +39,10 @@
   border-radius: 6px;
 }
 
+.tz_select {
+  font-size: 18px;
+}
+
 select.input-super {
   height: 72px;
   line-height: 72px;
@@ -56,6 +60,12 @@ select.input-super {
   color: #D4D8D1;
 }
 
-.win-icon:hover{
+.win-icon:hover {
   color: #337ab7;
+}
+
+.footer {
+  margin-top: 100px;
+  color: #D4D8D1;
+  font-size: 12pt;
 }

@@ -8,7 +8,7 @@
     <%= f.password_field :password, placeholder: "Password", class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.time_zone_select :time_zone %>
+    <%= f.time_zone_select :time_zone, nil, {}, {:class => 'tz_select full-width'} %>
   </div>
   <div class="form-group pull-right">
     <%= f.submit button_text, class: "btn btn-success btn-wide" %>
