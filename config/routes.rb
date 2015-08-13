@@ -9,7 +9,7 @@ Wins::Application.routes.draw do
 
   resources :users, only: [:create, :edit, :update, :show]
 
-  resources :wins, except: [:new] do
+  resources :wins, except: [:new, :show] do
     member do
       put :complete # complete_win_path	PUT	/wins/:id/complete(.:format)
     end

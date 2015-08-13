@@ -1,10 +1,10 @@
 class WinsController < ApplicationController
   before_action :require_login
+  before_action :find_win, only: [:update, :complete, :destroy]
 
   def index
     @win = Win.new
-    @wins = Win.where(creator: current_user).today
-    @wins = Win.where(creator: current_user).not_today.reverse if params[:history].present?
+    set_win_list
   end
 
   def create
@@ -20,12 +20,10 @@ class WinsController < ApplicationController
   end
 
   def edit
-    @wins = Win.where(creator: current_user).today
-    @wins = Win.where(creator: current_user).not_today.reverse if params[:history].present?
+    set_win_list
   end
 
   def update
-    @win = Win.find(params[:id])
     if @win.update(win_params)
       if params[:history].present?
        redirect_to wins_path(history: true)
@@ -39,23 +37,17 @@ class WinsController < ApplicationController
   end
 
   def complete
-    @win = Win.find(params[:id])
     @win.update(win_params)
     respond_to do |format|
       format.html do
-        flash[:notice] = 'Updated'
+        flash[:notice] = 'Win updated'
         redirect_to :back
       end
       format.js
     end
   end
 
-  def show
-
-  end
-
   def destroy
-    @win = Win.find(params[:id])
     if @win.created_at.to_date == Date.current
       @win.destroy
       redirect_to wins_path
@@ -66,6 +58,15 @@ class WinsController < ApplicationController
   end
 
   private
+
+  def set_win_list
+    @wins = Win.where(creator: current_user).today
+    @wins = Win.where(creator: current_user).not_today.reverse if params[:history].present?
+  end
+
+  def find_win
+    @win = Win.find(params[:id])
+  end
 
   def win_params
     params.require(:win).permit(:body, :user_id, :completed)
