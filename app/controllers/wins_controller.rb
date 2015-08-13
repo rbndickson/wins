@@ -21,7 +21,7 @@ class WinsController < ApplicationController
 
   def edit
     @wins = Win.where(creator: current_user).today
-    @wins = Win.where(creator: current_user).reverse if params[:history].present?
+    @wins = Win.where(creator: current_user).not_today.reverse if params[:history].present?
   end
 
   def update
@@ -56,8 +56,13 @@ class WinsController < ApplicationController
 
   def destroy
     @win = Win.find(params[:id])
-    @win.destroy
-    redirect_to wins_path
+    if @win.created_at.to_date == Date.current
+      @win.destroy
+      redirect_to wins_path
+    else
+      @win.destroy
+      redirect_to :back
+    end
   end
 
   private
