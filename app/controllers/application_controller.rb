@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :logged_in?, :current_win_count
+  around_filter :user_time_zone, :if => :current_user
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -25,5 +26,9 @@ class ApplicationController < ActionController::Base
 
   def current_win_count
     Win.where(user_id: current_user).today.size
+  end
+
+  def user_time_zone(&block)
+    Time.use_zone(current_user.time_zone, &block)
   end
 end

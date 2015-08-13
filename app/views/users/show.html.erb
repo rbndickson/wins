@@ -5,5 +5,7 @@
       <p class="lead"><%= @user.username %></p>
     </div>
     <hr>
-    <p>Time zone:</p>  </div>
+    <p>Time zone: <%= @user.time_zone %></p>
+    <p>Time: <%= Time.current.in_time_zone(@user.time_zone) %></p>
+  </div>
 </div>
