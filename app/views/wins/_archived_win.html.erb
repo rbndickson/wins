@@ -1,0 +1,41 @@
+<% if archived_win.id == params[:id].to_i %>
+  <div class="row history-row-spacer">
+    <%= form_for archived_win do |f| %>
+      <%= hidden_field_tag :history , true %>
+      <div class="col-md-10">
+        <%= f.text_field :body, class: "form-control", :autofocus => true %>
+      </div>
+      <div class="col-md-1 ">
+        <%= f.submit "Update", :history => true, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+    <div class="col-md-1">
+      <%= link_to win_path(archived_win), method: :delete do %>
+        <h4 class="text-center"><span class="glyphicon glyphicon-trash win-icon"></span></h4>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <% if archived_win.completed == true %>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success" id="win-<%= archived_win.id %>">
+        <h4 class="list-group-item-heading"><span class="label label-success" id="win-label-<%= archived_win.id %>"><%= format_datetime(archived_win.created_at) %></span>
+        <%= archived_win.body %>
+        <%= link_to complete_win_path(archived_win, win: {completed: false}, history: true), id: archived_win.id, method: :put, remote: true  do %>
+          <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
+        <% end %>
+  <% else %>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-danger" id="win-<%= archived_win.id %>">
+        <h4 class="list-group-item-heading"><span class="label label-danger" id="win-label-<%= archived_win.id %>"><%= format_datetime(archived_win.created_at) %></span>
+        <%= archived_win.body %>
+        <%= link_to complete_win_path(archived_win, win: {completed: true}, history: true), id: archived_win.id, method: :put, remote: true do %>
+          <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
+        <% end %>
+  <% end %>
+  <%= link_to edit_win_path(archived_win, history: true), method: :get do %>
+    <span class="glyphicon glyphicon-edit win-icon pull-right"></span></h4>
+  <% end %>
+      </li>
+    </ul>
+<% end %>

@@ -1,87 +1,38 @@
-<% if params[:history].present? %>
-  <% if win.id == params[:id].to_i %>
-    <div class="row">
-      <%= form_for win do |f| %>
+<% if win.id == params[:id].to_i %>
+  <div class="row row-spacer">
+    <%= form_for win do |f| %>
       <div class="col-md-9">
         <%= f.text_field :body, class: "form-control input-lg input-super", :autofocus => true %>
       </div>
       <div class="col-md-2 ">
         <%= f.submit "Update", class: 'btn btn-lg btn-super btn-primary' %>
       </div>
+    <% end %>
+    <div class="col-md-1">
+      <%= link_to win_path(win), method: :delete do %>
+        <h1><span class="glyphicon glyphicon-trash win-icon pull-right"></span></h1>
       <% end %>
-      <div class="col-md-1">
-        <%= link_to win_path(win), method: :delete do %>
-          <h5><span class="glyphicon glyphicon-trash win-icon pull-right"></span></h1>
-        <% end %>
-      </div>
     </div>
-  <% else %>
-
-
-
-    <% if win.completed == true %>
-
-      <h5><li  class="list-group-item list-group-item-success">
-        <%= win.body %>
-        <%= link_to win_path(win, win: {history: true, completed: false}), method: :put do %>
-          <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
-        <% end %>
-
-    <% else %>
-        <h5><li  class="list-group-item">
-        <%= win.body %>
-        <%= link_to win_path(win, win: {history: true, completed: true}), method: :put do %>
-          <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
-        <% end %>
-    <% end %>
-    <%= link_to edit_win_path(win, win: {history: true, completed: true}), method: :get do %>
-      <span class="glyphicon glyphicon-edit win-icon pull-right"></span>
-    <% end %>
-    </li></h5>
-  <% end %>
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- End of win history - start of todays wins -->
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+  </div>
 <% else %>
-  <% if win.id == params[:id].to_i %>
-    <div class="row">
-      <%= form_for win do |f| %>
-      <div class="col-md-9">
-        <%= f.text_field :body, class: "form-control input-lg input-super", :autofocus => true %>
-      </div>
-      <div class="col-md-2 ">
-        <%= f.submit "Update", class: 'btn btn-lg btn-super btn-primary' %>
-      </div>
-      <% end %>
-      <div class="col-md-1">
-        <%= link_to win_path(win), method: :delete do %>
-          <h1><span class="glyphicon glyphicon-trash win-icon pull-right"></span></h1>
+  <% if win.completed == true %>
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success" id="win-<%= win.id %>">
+        <h1 class="list-group-item-heading"><%= win.body %>
+        <%= link_to complete_win_path(win, win: {completed: false}), id: win.id, method: :put, remote: true do %>
+          <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
         <% end %>
-      </div>
-    </div>
   <% else %>
-
-
-    <% if win.completed == true %>
-
-      <h1><li  class="list-group-item list-group-item-success">
-        <%= win.body %>
-        <%= link_to win_path(win, win: {completed: false}), method: :put do %>
+    <ul class="list-group">
+      <li  class="list-group-item" id="win-<%= win.id %>">
+        <h1 class="list-group-item-heading"><%= win.body %>
+        <%= link_to complete_win_path(win, win: {completed: true}), id: win.id, method: :put, remote: true do %>
           <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
         <% end %>
-
-    <% else %>
-        <h1><li  class="list-group-item">
-        <%= win.body %>
-        <%= link_to win_path(win, win: {completed: true}), method: :put do %>
-          <span class="glyphicon glyphicon-ok win-icon pull-right"></span>
-        <% end %>
-    <% end %>
-    <%= link_to edit_win_path(win), method: :get do %>
-      <span class="glyphicon glyphicon-edit win-icon pull-right"></span>
-    <% end %>
-    </li></h1>
   <% end %>
+        <%= link_to edit_win_path(win), method: :get do %>
+          <span class="glyphicon glyphicon-edit win-icon pull-right"></span></h1>
+        <% end %>
+      </li>
+    </ul>
 <% end %>

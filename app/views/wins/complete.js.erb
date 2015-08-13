@@ -1,0 +1,25 @@
+<% if request.query_parameters[:history].present? %>
+  <% if @win.completed == false %>
+    $('#win-<%= @win.id %>').removeClass('list-group-item-success')
+    $('#win-<%= @win.id %>').addClass('list-group-item-danger')
+    $('#win-label-<%= @win.id %>').removeClass('label-success')
+    $('#win-label-<%= @win.id %>').addClass('label-danger')
+    $('#<%= @win.id %>').attr('href', '/wins/<%= @win.id %>/complete?history=true&win%5Bcompleted%5D=true')
+  <% elsif @win.completed == true %>
+    $('#win-<%= @win.id %>').removeClass('list-group-item-danger')
+    $('#win-<%= @win.id %>').addClass('list-group-item-success')
+    $('#win-label-<%= @win.id %>').removeClass('label-danger')
+    $('#win-label-<%= @win.id %>').addClass('label-success')
+    $('#<%= @win.id %>').attr('href', '/wins/<%= @win.id %>/complete?history=true&win%5Bcompleted%5D=false')
+  <% end %>
+
+<% else %>
+
+  <% if @win.completed == false %>
+    $('#win-<%= @win.id %>').removeClass('list-group-item-success')
+    $('#<%= @win.id %>').attr('href', '/wins/<%= @win.id %>/complete?win%5Bcompleted%5D=true')
+  <% elsif @win.completed == true %>
+    $('#win-<%= @win.id %>').addClass('list-group-item-success')
+    $('#<%= @win.id %>').attr('href', '/wins/<%= @win.id %>/complete?win%5Bcompleted%5D=false')
+  <% end %>
+<% end %>

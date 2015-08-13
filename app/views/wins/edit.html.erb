@@ -5,5 +5,9 @@
 <% end %>
 
 <ul class="list-group">
-  <%= render @wins %>
+  <% if params[:history].present? %>
+    <%= render partial: "archived_win", collection: @wins %>
+  <% else %>
+    <%= render @wins %>
+  <% end %>
 </ul>
