@@ -5,4 +5,5 @@ class Win < ActiveRecord::Base
   validates :body, presence: true
 
   scope :today, -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
+  scope :not_today , -> { where.not("created_at >= ?", Time.zone.now.beginning_of_day) }
 end

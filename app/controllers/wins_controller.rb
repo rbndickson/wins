@@ -4,7 +4,7 @@ class WinsController < ApplicationController
   def index
     @win = Win.new
     @wins = Win.where(creator: current_user).today
-    @wins = Win.where(creator: current_user).reverse if params[:history].present?
+    @wins = Win.where(creator: current_user).not_today.reverse if params[:history].present?
   end
 
   def create
