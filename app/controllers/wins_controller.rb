@@ -60,8 +60,12 @@ class WinsController < ApplicationController
   private
 
   def set_win_list
-    @wins = Win.where(creator: current_user).today
-    @wins = Win.where(creator: current_user).not_today.reverse if params[:history].present?
+    if params[:history].present?
+      @wins = Win.where(creator: current_user)
+                 .not_today.order('created_at').reverse
+    else
+      @wins = Win.where(creator: current_user).today.order('created_at')
+    end
   end
 
   def find_win
