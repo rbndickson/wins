@@ -20,6 +20,9 @@
     $('#<%= @win.id %>').attr('href', '/wins/<%= @win.id %>/complete?win%5Bcompleted%5D=true')
   <% elsif @win.completed == true %>
     $('#win-<%= @win.id %>').addClass('list-group-item-success')
+    <% if Win.where(user_id: current_user, completed: true).today.size == 3 %>
+      $('.list-group-item-success').effect("pulsate", {times: 1}, 1500)
     $('#<%= @win.id %>').attr('href', '/wins/<%= @win.id %>/complete?win%5Bcompleted%5D=false')
+    <% end %>
   <% end %>
 <% end %>
